@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <meta name="author" content="sigmdel.ca/michel">
+ <meta name="created" content="2024-05-11">
+ <meta name="changed" content="2024-7-24, 00:36">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <!-- base href="https://www.sigmdel.ca/michel/" -->
+ <link rel="icon" type="image/png" href="https://www.sigmdel.ca/michel/faveicon.png">
+ <link href="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/base2.css" type="text/css" rel="stylesheet">
+<script async="" src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/matomo.js"></script><script>
+  function encodeHTML(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+  }
+</script>
+<noscript><style> .ifjsON { display: none } </style></noscript>
+ <script>
+	//https://www.startpage.com/do/dsearch?query=xiao%20site:sigmdel.ca/michel
+	//https://www.startpage.com/sp/search?query=font%20!sigmdel.ca/michel
+	function startPageSearch() {
+	  var qw = document.getElementById('query').value
+	  var qurl = 'https://www.startpage.com/sp/search?query=' + encodeHTML(qw) + '%20!sigmdel.ca/michel';
+	  window.open(qurl);
+	}
+ </script>
+ <title>First Look at the Super Mini ESP32-C3</title>
+<!-- Matomo -->
+<script>
+  let hostn = location.hostname;
+  if (hostn.includes("sigmdel.ca")) {
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//sigmdel.ca/matomo/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '1']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  }
+</script>
+<!-- End Matomo Code -->
+</head>
+<body data-new-gr-c-s-check-loaded="8.912.0" data-gr-ext-installed="">
+<div id="topbar" class="hcontainer">
+  <div class="date" title="year-month-day of last revision">2024-06-21</div><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/md3262.png" alt="md" width="62" height="32"><div class="titre">First Look at the Super Mini ESP32-C3</div>
+</div> <!--topbar-->
+
+<div id="menu" class="hcontainer">
+  <a title="news and recent posts" class="choice" href="https://www.sigmdel.ca/michel/index_en.html"><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/home-icon.png" alt="news and recent posts"></a>
+  <a title="about" class="choice" href="https://www.sigmdel.ca/michel/about_en.html"><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/about-icon.png" alt="about"></a>
+  <a title="archives" class="choice" href="https://www.sigmdel.ca/michel/archives_en.html"><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/archives-icon.png" alt="archives"></a>
+  <a title="version française" class="choice" href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_fr.html"><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/fr-icon.png" alt="version française"></a>
+  <div id="search">
+    <form name="sf" method="get" target="_blank" action="https://duckduckgo.com">
+      <input type="text" class="choice" style="background: white" id="query" name="q" size="18" onclick="this.value='';" placeholder="Search...">
+      <button type="submit" name="sites" value="sigmdel.ca/michel" title="local search with DuckDuckGo">DDG</button>
+      <button type="button" class="ifjsON" onclick="startPageSearch()" title="local search with Startpage">SP</button>
+    </form>
+  </div>
+</div><!--menu-->
+<div class="hcontainer linktable-top">
+<span style="float: left"><a href="https://www.sigmdel.ca/michel/ha/xiao/xiao_esp32c3_intro_en.html"><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/arrow-left.png" alt="&lt;-" class="left-link-arrow">First Look at the Seeed Studio XIAO ESP32C3</a></span>
+</div>
+
+<div class="content">
+
+<p><a href="https://www.sigmdel.ca/michel/ha/esp8266/img/esp32c3_super_mini_purchase.jpg"><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/esp32c3_super_mini_purchase.jpg" alt="aliexpress purchase order" style="max-width: 320px; float: right; margin-left: 8px"></a>A
+ few days ago, I received a package from a well-known Chinese e-commerce
+ site that contained 4 ESP32-C3 Super Mini development boards at a price
+ that was very hard to resist. I was curious about these because of the 
+compact on-board ceramic antenna which could make these boards easier to
+ deploy than the XIAO ESP32C3 from SeeedStudio. The boards were cheap, 
+but they cannot be qualified as the best available in what has become a 
+crowded field. Before coming to a final judgment about their true value,
+ here are the results of my first encounter with these boards.</p>
+
+
+<h1 id="toc">Table of content</h1>
+<ol>
+  <li><a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#hardware">Hardware</a>
+  <ol>
+    <li><a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#usb">USB Connection to a Computer</a></li>
+    <li><a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#mode">Bootloader Mode</a></li>
+    <li><a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#power">Power Requirements</a></li>
+    <li><a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#maker">Who Makes This Board?</a></li>
+    <li><a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#schematic">Board Schematic</a></li>
+  </ol>
+  </li>
+  <li><a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#arduino">Programming in the Arduino IDE</a></li>
+  <li><a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#platformio">Programming in PlatformIO</a></li>
+  <li><a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#sketches">Testing with Simple Sketches</a>
+  <ol>
+    <li><a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#hello">Hello World</a></li>
+    <li><a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#wifi_test">Wi-Fi Functionality</a></li>
+    <li><a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#bluetooth">Bluetooth LE Functionality</a></li>
+  </ol>
+  </li>
+  <li><a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#recommend">Recommendation?</a></li>
+</ol>
+
+<!-- ++++ Section ++++++++++++++++++++++++++++++++++++ -->
+<h1 id="hardware" class="Section">
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#hardware">Hardware</a>
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#toc"><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/arrow-up.png" alt="toc" class="up-link-arrow"></a>
+</h1>
+
+<p><a href="https://www.sigmdel.ca/michel/ha/esp8266/img/esp32c3_super_mini_vendor.jpg"><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/esp32c3_super_mini_vendor.jpg" alt="vendor product page" style="max-width: 248px; float: left; margin-right: 8px"></a>According to the seller's product page, the true <em>discounted</em> price of the board is $ 7.70 which means that I did obtain them at a significant discount.</p>
+
+<p>The claimed <em>regular</em> price of $20.84 makes no sense, of 
+course. As is often the case, there are discrepancies in the seller's 
+web page. For example, the board shown above does not match the one 
+shown in the image showing top and bottom views. Here is the bottom view
+ with pin functions provided by the vendor.</p>
+
+<p><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/esp32c3_super_mini_vendor_pinout.jpg" alt="vendor board pinout"></p>
+
+<p>The boards received corresponded to none of the images shown by the 
+vendor. They have no silkscreen markings for the two on-board LEDs. The 
+bottom side silkscreen do not contain the open hardware logo and the 
+ESP32-C3 and Super Mini labels are almost unreadable. However the 
+components appear to be very similar to those shown in the above image. 
+In particular, the simplified set of components near the antenna is the 
+same which may be significant as will be seen later. Luckily, the pin 
+numbering is the same. Here is a representation of the top view of the 
+boards received with relatively accurate labels and with pin numbers and
+ serial functions at the sides of the pin.</p>
+
+<p><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/pinout_top_big_logo.png" alt="my own board pinout"></p>
+
+<p>The red power LED to the left of the USB-C connector indicates that 
+the device is on. The blue LED to the right of the ESP32-C3 chip, just 
+below the reset button is connected to I/O pin 8. This is by no means 
+universal, as many ESP32-C3 development boards have an available LED or 
+RGB LED connected to a different I/O pin while the XIAO ESP32C3 has no 
+on-board LED.</p>
+
+<p>The boot push button is connected between ground and I/O pin 9. All 
+boot buttons on ESP32-C3 dev boards will be connected to that particular
+ I/O pin because it is part of the "strapping" to put the board in 
+bootloader mode.</p>
+
+
+<!-- ++++ SubSection ++++++++++++++++++++++++++++++++++ -->
+<h2 id="usb" class="SubSection">
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#usb">USB Connection to a Computer</a>
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#toc"><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/arrow-up.png" alt="toc" class="up-link-arrow"></a>
+</h2>
+
+<p> When a Super Mini is connected to a USB port on a Windows machine, the distinctive <i>billy boop</i> sound should be heard as the device is recognized by the operating system. The board will then be assigned a COM port such as <code>COM6</code>.</p>
+
+<p> In Linux one can listen in on bus messages to see the operating system recognizing the device. Start the <code>dmesg</code> command line utility with the <code>-w</code> flag and then plug in the Super Mini.</p>
+
+<div class="scrn">
+michel@hp:~$ <span class="cmd">dmesg -w</span>
+...
+[1032247.122890] usb 3-10: new full-speed USB device number 38 using xhci_hcd
+[1032247.272076] usb 3-10: New USB device found, idVendor=303a, idProduct=1001, bcdDevice= 1.01
+[1032247.272080] usb 3-10: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[1032247.272082] usb 3-10: Product: USB JTAG/serial debug unit
+[1032247.272083] usb 3-10: Manufacturer: Espressif
+[1032247.272084] usb 3-10: SerialNumber: 34:B7:DA:FB:00:01
+[1032247.274798] cdc_acm 3-10:1.0: ttyACM0: USB ACM device
+</div>
+
+<p> Use the <span class="key">Ctrl</span><span class="key">C</span> keyboard combination to close that application. One could instead hunt for the device once it is plugged in.</p>
+
+  <div class="scrn">
+  michel@hp:~$ <span class="cmd">lsusb</span>
+...
+Bus 003 Device 125: ID 303a:1001 Espressif USB JTAG/serial debug unit
+
+michel@hp:~$ <span class="cmd">ls -l /dev/serial/by-id</span>
+total 0
+lrwxrwxrwx 1 root root 13 mai  5 13:10 usb-Espressif_USB_JTAG_serial_debug_unit_34:B7:DA:FB:00:01-if00 -&gt; ../../ttyACM0
+</div>
+
+<p> In either case, one sees that the device ID of the board is <code>303a:1001</code> and that it shows up as the <code>/dev/ttyACM0</code> serial device. The exact number after <code>ttyACM</code> will depend on the system. This information may be useful later on.</p>
+
+
+<!-- ++++ SubSection ++++++++++++++++++++++++++++++++++ -->
+<h2 id="mode" class="SubSection">
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#mode">Bootloader Mode</a>
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#toc"><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/arrow-up.png" alt="toc" class="up-link-arrow"></a>
+</h2>
+
+<p> To upload new firmware to the non-volatile flash memory of the ESP32-C3, the latter must be  in <i>bootloader mode</i>.
+ This is done by keeping the boot button (connected to I/O pin 9) 
+pressed when the reset button is pressed and release or when power is 
+applied to the board. I/O pins 2 and 8 should also be high when pin 9 is
+ low (ref: <a href="https://www.espressif.com/sites/default/files/documentation/esp32-c3_datasheet_en.pdf#susbsection.2.6">2.6 Strapping Pins</a> <i>ESP32-C3 Series Datasheet (Version 1.7)</i>.
+ Some ESP32-C3 dev boards do not have a boot button because the DTR and 
+RTS signal of an external USB to serial chip such as the CH340 or CP2912
+ handle pin 9 and the reset pin.</p>
+
+
+<!--
+
+  This is accomplished with so-called <a href="https://www.espressif.com/sites/default/files/documentation/esp32-c3_datasheet_en.pdf"> </a>strapping
+
+
+<div class="frame" style="padding-left: 12px; padding-right: 12px">
+<span style="font-weight: bold; color:maroon">2.6.1 Chip Boot Mode Control</span>
+<p>GPIO2, GPIO8, and GPIO9 control the boot mode after the reset is released. See Table 2-11 Chip Boot Mode Control.</p>
+
+Table 2-11. Chip Boot Mode Control
+<table class="plain_table">
+<tr><th>Boot Mode</th> <th>GPIO2 <sup>a</sup></th><th>GPIO8</th><th>GPIO9</th></tr>
+<tr><td>Default configuration</td><td>– (Floating)</td><td>– (Floating)</td><td>1 (Pull-up)</td></tr>
+<tr><td>Joint Download Boot <sup>b</sup></td><td>1</td><td>1</td><td>0</td></tr>
+</table>
+<br/>
+<table>
+<tr><td>(<sup>a</sup>)</td><td>GPIO2 actually does not determine SPI Boot and Joint Download Boot mode, but it is recommended to pull this pin up due to glitches.</td></tr>
+<tr><td valign="top">(<sup>b</sup>)</td><td>Joint Download Boot mode supports the following download methods:
+  <ul>
+  <li>USB-Serial-JTAG Download Boot</li>
+  <li>UART Download Boot</li>
+  </ul></td></tr>
+</table>
+In SPI Boot mode, the ROM bootloader loads and executes the program from SPI flash to boot the system.
+<p> In Joint Download Boot mode, users can download binary files into flash using UART0 or USB interface. It is
+  also possible to download binary files into SRAM and execute it from SRAM.</p>
+
+<div style="text-align:right; font-size: 80%">Source: <a href="https://www.espressif.com/sites/default/files/documentation/esp32-c3_datasheet_en.pdf" target="_blank">ESP32-C3 Series
+  Datasheet (Version 1.7)</a></div>
+</div>
+
+So to put
+-->
+
+<p> Once a firmware upload is completed, the board has to be reset by 
+pressing the RST button to return to normal mode which means that it 
+will execute the code in its flash memory.</p>
+
+<!-- ++++ SubSection ++++++++++++++++++++++++++++++++++ -->
+<h2 id="power" class="SubSection">
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#power">Power Requirements</a>
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#toc"><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/arrow-up.png" alt="toc" class="up-link-arrow"></a>
+</h2>
+
+<p>The Super Mini board can be powered via the USB-C connector (hence 
+with a 5 V power source) or directly through the 5V/Gnd pins. In that 
+case from 3.3 to 6 DC volts could be used. According to the schematic, 
+there is a blocking diode that would prevent back feeding power to the 
+USB source if power is also supplied to the board via the 5V pin. 
+However, there is no blocking diode to protect a power source connected 
+to the 5V pin, so as the documentation says "Remember that when 
+connecting to an external power supply, USB cannot be connected, and you
+ can only choose between USB and external power supply."</p>
+
+<p>The 3.3 V pin is connected directly to the regulated power output pin of the on board (<a href="http://www.microne.com.cn/en/product/261.html">ME6211</a>)
+ voltage regulator. That regulator is capable of producing a maximum 
+output current of 500 mA in optimal conditions and that is more or less 
+the minimum required current for the ESP32-C3 when using the radio (<a href="https://espressif.github.io/esp32-c3-book-en/chapter_5/5.3/5.3.5.html">ref</a>). Clearly, care must be exercised if using this output to power external loads.</p>
+
+
+<!-- ++++ SubSection ++++++++++++++++++++++++++++++++++ -->
+<h2 id="maker" class="SubSection">
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#maker">Who Makes this board?</a>
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#toc"><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/arrow-up.png" alt="toc" class="up-link-arrow"></a>
+</h2>
+
+<p>I have no idea who makes the boards sent by the vendor. Or more 
+precisely I don't know what to make of the following label on the 
+anti-static bag containing each board.</p>
+
+<p><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/esp32c3_super_mini_maker.jpg" alt="manufacturer package label"></p>
+
+<p>Luckily, an <a href="https://forum.arduino.cc/t/esp32-c3-supermini-pinout/1189850/">Arduino forum topic</a> contains links to a Tindie seller claiming that the board was designed by <a href="https://www.tindie.com/stores/adz1122/">Maker go</a> and a link to <a href="https://wiki.icbbuy.com/doku.php?id=developmentboard:esp32-c3mini">ICBbye</a> which seems to be an English language translation of part of the
+<a href="https://www.nologo.tech/product/esp32/esp32c3SuperMini/">nolog.tech</a> documentation about the board or a similar one. What is the link to Wuming Technology and Guangdong ICP No. 2023016901-1?</p>
+
+<p> Looking at images of other vendors and comments in forums, it is 
+clear that boards made by  multiple enterprises are sold under the <b>Super Mini</b> or <b>SuperMini ESP32-C3</b>
+ name. If one can believe the open hardware logo, that would be legal...
+ I think. However, undocumented changes to the architecture is not a 
+good development as it creates confusion.</p>
+
+<!-- ++++ SubSection ++++++++++++++++++++++++++++++++++ -->
+<h2 id="schematic" class="SubSection">
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#schematic">Board Schematic</a>
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#toc"><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/arrow-up.png" alt="toc" class="up-link-arrow"></a>
+</h2>
+
+<p>A schematic is available on <a href="https://wiki.icbbuy.com/doku.php?id=developmentboard:esp32-c3mini#schematic">ICBbuy</a> and <a href="https://www.nologo.tech/product/esp32/esp32c3SuperMini/esp32C3SuperMini.html#%E5%8E%9F%E7%90%86%E5%9B%BE">nologo</a>.
+ Unfortunately, the image has no legend attributing the design to 
+anyone. I am not even sure that the schematic corresponds to the boards I
+ received.
+Perhaps it is a straightforward implementation of a reference design by 
+Espressif. Something to investigate?</p>
+
+<!-- ++++ Section ++++++++++++++++++++++++++++++++++ -->
+<h1 id="arduino" class="Section">
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#arduino">Programming in the Arduino IDE</a>
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#toc"><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/arrow-up.png" alt="toc" class="up-link-arrow"></a>
+</h1>
+
+<p>Within two weeks of each other, two Super Mini board definitions were committed to the <a href="https://github.com/espressif/arduino-esp32">arduino-esp32</a> core.</p>
+
+<ul>
+<li>
+<p><a href="https://github.com/espressif/arduino-esp32/commit/50f436c6fc3d525d08a81f6e0f222b88a7e6cc7d">Add MakerGo C3 SuperMini def (#9050)</a> January 16, 2024.</p>
+</li>
+<li>
+<p><a href="https://github.com/espressif/arduino-esp32/commit/8eaa893eff5418f27647a070c4e573f84504c680">Add board support for Nologo ESP32C3 Super Mini (#9174)</a> January 31, 2024.</p>
+</li>
+</ul>
+
+<p>They are quite similar, though one would prefer the older MakerGo definition since its variant <code>arduino_pin.h</code>
+ file is a superset of the newer one. These board definitions and many 
+other for ESP32-C3 based boards are available in the stable version 
+3.0.1 of the <a href="https://github.com/espressif/arduino-esp32">arduino-esp32</a> core by Espressif available since June 5 2024. To obtain the <code>esp32</code> core, add the following boards manager configuration file</p>
+
+<div class="scrn listing">
+https://espressif.github.io/arduino-esp32/package_esp32_dev_index.json
+</div>
+
+<p>in the Arduino IDE preferences.</p>
+
+<!-- p><img src="ha/esp8266/img/esp32c3_super_mini_esp32_rc1_3.jpg" alt=""></p -->
+<!-- XXXXXXXXXXX need new image »»»»»»»»»»»»»»»»»»» -->
+
+<p>Then install version 3.0.1 (or latest) of <code>esp32</code> in the BOARDS MANAGER.</p>
+
+<!-- p><img src="ha/esp8266/img/esp32c3_super_mini_esp32_3_rc1_install.jpg" alt=""></p  -->
+<!-- XXXXXXXXXXX need new image »»»»»»»»»»»»»»»»»»» -->
+
+<p>Connect the Super Mini board to the computer with an appropriate USB cable. On my Linux machine, the board shows up as the <code>/dev/ttyACM0</code> serial device.</p>
+
+<p>Now select the desired board definition among the numerous <code>esp32</code> board definitions. Repeatedly pressing the <span class="key">M</span>
+ key will jump to the next definition starting with the letter "m". 
+However the definitions appear to be in chronological order according to
+ the date they were added, so go to the very end of the list and search 
+backward to quickly find the desired board.</p>
+
+<p><a href="https://www.sigmdel.ca/michel/ha/esp8266/img/esp32c3_super_mini_arduino_ide.jpg"><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/esp32c3_super_mini_arduino_ide.jpg" alt="" style="max-width:512px"></a></p>
+
+<p>When compiled without an error, the firmware can be uploaded to the 
+board. Of course, the latter has to be put into bootloader mode as 
+explained above in order to upload the firmware and then, once that is 
+done, the board must be reset to resume normal functioning.</p>
+
+
+<!-- ++++ Section ++++++++++++++++++++++++++++++++++ -->
+<h1 id="platformio" class="Section">
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#platformio">Programming in PlatformIO</a>
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#toc"><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/arrow-up.png" alt="toc" class="up-link-arrow"></a>
+</h1>
+
+<p>As far as I can ascertain, the Espressif32 platform (version 6.7.0) is still using an older version 2.0.16 of the <code>arduino-esp32</code>
+ core for the Arduino framework. Consequently, there are no Super Mini 
+ESP32C3 board definitions. Early adopters of the Super Mini boards, 
+borrowed a <em>close enough</em> board definition and modified it with a custom <code>platformio.ini</code> configuration file as shown next.</p>
+
+<div class="scrn listing"><!-- HTML generated using hilite.me -->
+<span style="color: #008000; font-weight: bold">[env:super_mini_esp32c3]</span>
+<span style="color: #7D9029">board</span> <span style="color: #666666">=</span> <span style="color: #BA2121">esp32-c3-devkitc-02</span>
+<span style="color: #7D9029">platform</span> <span style="color: #666666">=</span> <span style="color: #BA2121">espressif32</span>
+<span style="color: #7D9029">framework</span> <span style="color: #666666">=</span> <span style="color: #BA2121">arduino</span>
+<span style="color: #7D9029">monitor_speed</span> <span style="color: #666666">=</span> <span style="color: #BA2121">460800</span>
+<span style="color: #408080; font-style: italic">;monitor_port = /dev/ttyACM0</span>
+<span style="color: #408080; font-style: italic">;upload_port = /dev/ttyACM0</span>
+<span style="color: #7D9029">build_flags</span> <span style="color: #666666">=</span><span style="color: #BA2121"></span>
+<span style="color: #BA2121">    -D ARDUINO_USB_MODE=1</span>
+<span style="color: #BA2121">    -D ARDUINO_USB_CDC_ON_BOOT=1</span>
+</div>
+
+<p>The other Espressif ESP32-C3 development kit <code>esp32-c3-devkitm-1</code> was also used. These two boards have <em>almost</em>
+ the same I/O pin assignment as the SuperMini but they have on board USB
+ to serial adapters while the Super Mini does not as it uses the built 
+in USB peripheral instead. That's the reason for the addition of the <code>ARDUINO_USB_MODE</code> and <code>ARDUINO_USB_CDC_ON_BOOT</code> macros defined with build flags.</p>
+
+<p>Since then, DFRobot has introduced the <a href="https://www.dfrobot.com/product-2566.html">Beetle ESP32-C3 Mini Size</a> which is <em>almost</em> identical to Super Mini except for an additional GDI connector on the back side. Consequently this is the <code>platformio.ini</code> configuration that I would use.</p>
+
+<div class="scrn listing">
+<span style="color: #008000; font-weight: bold">[env:super_mini_esp32c3]</span>
+<span style="color: #7D9029">board</span> <span style="color: #666666">=</span> <span style="color: #BA2121">dfrobot_beetle_esp32c3</span>
+<span style="color: #7D9029">platform</span> <span style="color: #666666">=</span> <span style="color: #BA2121">espressif32</span>
+<span style="color: #7D9029">framework</span> <span style="color: #666666">=</span> <span style="color: #BA2121">arduino</span>
+<span style="color: #7D9029">monitor_speed</span> <span style="color: #666666">=</span> <span style="color: #BA2121">460800</span>
+<span style="color: #408080; font-style: italic">;monitor_port = /dev/ttyACM0</span>
+<span style="color: #408080; font-style: italic">;upload_port = /dev/ttyACM0</span>
+</div>
+
+<p>There is a minor problem with these borrowed board definitions; they have the wrong value for the <code>BUILTIN_LED</code>
+ variable and macro. So I decided to create a custom board definition 
+and variant pin configuration file. First here is the board definition 
+file, which I named <code>super_mini_esp32c3.json</code>.</p>
+
+<div class="scrn listing">
+{
+  <span style="color: #008000; font-weight: bold">"build"</span>: {
+    <span style="color: #008000; font-weight: bold">"arduino"</span>: {
+      <span style="color: #008000; font-weight: bold">"ldscript"</span>: <span style="color: #BA2121">"esp32c3_out.ld"</span>
+    },
+    <span style="color: #008000; font-weight: bold">"core"</span>: <span style="color: #BA2121">"esp32"</span>,
+    <span style="color: #008000; font-weight: bold">"extra_flags"</span>: [
+      <span style="color: #BA2121">"-DARDUINO_SUPER_MINI_ESP32C3"</span>,
+      <span style="color: #BA2121">"-DARDUINO_USB_MODE=1"</span>,
+      <span style="color: #BA2121">"-DARDUINO_USB_CDC_ON_BOOT=1"</span>
+    ],
+    <span style="color: #008000; font-weight: bold">"f_cpu"</span>: <span style="color: #BA2121">"160000000L"</span>,
+    <span style="color: #008000; font-weight: bold">"f_flash"</span>: <span style="color: #BA2121">"80000000L"</span>,
+    <span style="color: #008000; font-weight: bold">"flash_mode"</span>: <span style="color: #BA2121">"qio"</span>,
+    <span style="color: #008000; font-weight: bold">"hwids"</span>: [
+      [
+        <span style="color: #BA2121">"0x303a"</span>,
+        <span style="color: #BA2121">"0x1001"</span>
+      ]
+    ],
+    <span style="color: #008000; font-weight: bold">"mcu"</span>: <span style="color: #BA2121">"esp32c3"</span>,
+    <span style="color: #008000; font-weight: bold">"variant"</span>: <span style="color: #BA2121">"super_mini_esp32c3"</span>
+  },
+  <span style="color: #008000; font-weight: bold">"connectivity"</span>: [
+    <span style="color: #BA2121">"wifi"</span>
+  ],
+  <span style="color: #008000; font-weight: bold">"debug"</span>: {
+    <span style="color: #008000; font-weight: bold">"openocd_target"</span>: <span style="color: #BA2121">"esp32c3.cfg"</span>
+  },
+  <span style="color: #008000; font-weight: bold">"frameworks"</span>: [
+    <span style="color: #BA2121">"arduino"</span>,
+    <span style="color: #BA2121">"espidf"</span>
+  ],
+  <span style="color: #008000; font-weight: bold">"name"</span>: <span style="color: #BA2121">"ESP32C3-SuperMini"</span>,
+  <span style="color: #008000; font-weight: bold">"upload"</span>: {
+    <span style="color: #008000; font-weight: bold">"flash_size"</span>: <span style="color: #BA2121">"4MB"</span>,
+    <span style="color: #008000; font-weight: bold">"maximum_ram_size"</span>: <span style="color: #666666">327680</span>,
+    <span style="color: #008000; font-weight: bold">"maximum_size"</span>: <span style="color: #666666">4194304</span>,
+    <span style="color: #008000; font-weight: bold">"require_upload_port"</span>: <span style="color: #008000; font-weight: bold">true</span>,
+    <span style="color: #008000; font-weight: bold">"speed"</span>: <span style="color: #666666">460800</span>
+  },
+  <span style="color: #008000; font-weight: bold">"url"</span>: <span style="color: #BA2121">"https://wiki.icbbuy.com/doku.php?id=developmentboard:esp32-c3mini#esp32-c3mini"</span>,
+  <span style="color: #008000; font-weight: bold">"vendor"</span>: <span style="color: #BA2121">"ICBbuy"</span>
+}
+</div>
+
+<p>And here is the variant pin definition header file, <code>pins_arduino.h</code>.</p>
+
+<div class="scrn listing"><!-- HTML generated using hilite.me -->
+<span style="color: #BC7A00">#ifndef Pins_Arduino_h</span>
+<span style="color: #BC7A00">#define Pins_Arduino_h</span>
+
+<span style="color: #BC7A00">#include &lt;stdint.h&gt;</span>
+
+<span style="color: #008000; font-weight: bold">static</span> <span style="color: #008000; font-weight: bold">const</span> <span style="color: #B00040">uint8_t</span> LED_BUILTIN <span style="color: #666666">=</span> <span style="color: #666666">8</span>;
+<span style="color: #BC7A00">#define BUILTIN_LED LED_BUILTIN </span><span style="color: #408080; font-style: italic">// backward compatibility</span>
+<span style="color: #BC7A00">#define LED_BUILTIN LED_BUILTIN</span>
+
+<span style="color: #008000; font-weight: bold">static</span> <span style="color: #008000; font-weight: bold">const</span> <span style="color: #B00040">uint8_t</span> BOOT_BUILTIN <span style="color: #666666">=</span> <span style="color: #666666">9</span>; <span style="color: #408080; font-style: italic">// boot button</span>
+<span style="color: #BC7A00">#define BOOT_BUILTIN BOOT_BUILTIN</span>
+
+<span style="color: #BC7A00">#define TX1 0</span>
+<span style="color: #BC7A00">#define RX1 1</span>
+
+<span style="color: #008000; font-weight: bold">static</span> <span style="color: #008000; font-weight: bold">const</span> <span style="color: #B00040">uint8_t</span> TX <span style="color: #666666">=</span> <span style="color: #666666">21</span>;
+<span style="color: #008000; font-weight: bold">static</span> <span style="color: #008000; font-weight: bold">const</span> <span style="color: #B00040">uint8_t</span> RX <span style="color: #666666">=</span> <span style="color: #666666">20</span>;
+
+<span style="color: #008000; font-weight: bold">static</span> <span style="color: #008000; font-weight: bold">const</span> <span style="color: #B00040">uint8_t</span> SDA <span style="color: #666666">=</span> <span style="color: #666666">8</span>;
+<span style="color: #008000; font-weight: bold">static</span> <span style="color: #008000; font-weight: bold">const</span> <span style="color: #B00040">uint8_t</span> SCL <span style="color: #666666">=</span> <span style="color: #666666">9</span>;
+
+<span style="color: #008000; font-weight: bold">static</span> <span style="color: #008000; font-weight: bold">const</span> <span style="color: #B00040">uint8_t</span> SS    <span style="color: #666666">=</span> <span style="color: #666666">7</span>;
+<span style="color: #008000; font-weight: bold">static</span> <span style="color: #008000; font-weight: bold">const</span> <span style="color: #B00040">uint8_t</span> MOSI  <span style="color: #666666">=</span> <span style="color: #666666">6</span>;
+<span style="color: #008000; font-weight: bold">static</span> <span style="color: #008000; font-weight: bold">const</span> <span style="color: #B00040">uint8_t</span> MISO  <span style="color: #666666">=</span> <span style="color: #666666">5</span>;
+<span style="color: #008000; font-weight: bold">static</span> <span style="color: #008000; font-weight: bold">const</span> <span style="color: #B00040">uint8_t</span> SCK   <span style="color: #666666">=</span> <span style="color: #666666">4</span>;
+
+<span style="color: #008000; font-weight: bold">static</span> <span style="color: #008000; font-weight: bold">const</span> <span style="color: #B00040">uint8_t</span> A0 <span style="color: #666666">=</span> <span style="color: #666666">0</span>;
+<span style="color: #008000; font-weight: bold">static</span> <span style="color: #008000; font-weight: bold">const</span> <span style="color: #B00040">uint8_t</span> A1 <span style="color: #666666">=</span> <span style="color: #666666">1</span>;
+<span style="color: #008000; font-weight: bold">static</span> <span style="color: #008000; font-weight: bold">const</span> <span style="color: #B00040">uint8_t</span> A2 <span style="color: #666666">=</span> <span style="color: #666666">2</span>;
+<span style="color: #008000; font-weight: bold">static</span> <span style="color: #008000; font-weight: bold">const</span> <span style="color: #B00040">uint8_t</span> A3 <span style="color: #666666">=</span> <span style="color: #666666">3</span>;
+<span style="color: #008000; font-weight: bold">static</span> <span style="color: #008000; font-weight: bold">const</span> <span style="color: #B00040">uint8_t</span> A4 <span style="color: #666666">=</span> <span style="color: #666666">4</span>;
+<span style="color: #008000; font-weight: bold">static</span> <span style="color: #008000; font-weight: bold">const</span> <span style="color: #B00040">uint8_t</span> A5 <span style="color: #666666">=</span> <span style="color: #666666">5</span>;
+
+<span style="color: #BC7A00">#endif </span><span style="color: #408080; font-style: italic">/* Pins_Arduino_h */</span><span style="color: #BC7A00"></span>
+</div>
+
+<p>It's obviously a merge of the two Super Mini variant files found in 
+the newest Arduino ESP32 core. I copied these files to their appropriate
+ location in the <code>.platformio</code> directory on my desktop machine.</p>
+
+<ul>
+<li><code>/home/michel/.platformio/platforms/espressif32/boards/super_mini_esp32c3.json</code></li>
+<li><code>/home/michel/.platformio/packages/framework-arduinoespressif32/variants/super_mini_esp32c3/pins_arduino.h</code></li>
+</ul>
+
+<p> The two files can be dowloaded from the <a href="https://github.com/sigmdel/supermini_esp32c3_sketches/tree/main/resources" target="_blank">resources</a> foler in a GitHub repository.</p>
+
+<p>Then I restarted VSCodium and created a new PlaftformIO project with the Project Wizard.</p>
+
+<p><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/esp32c3_super_mini_pio_wizard.jpg" alt="New Project Wizard"></p>
+
+<p>And, as the screen capture shows, the new board definition was available.</p>
+<p>The following <code>platformio.ini</code> configuration file was automatically created.</p>
+
+<div class="scrn listing">
+<span style="color: #008000; font-weight: bold">[env:super_mini_esp32c3]</span>
+<span style="color: #7D9029">platform</span> <span style="color: #666666">=</span> <span style="color: #BA2121">espressif32</span>
+<span style="color: #7D9029">board</span> <span style="color: #666666">=</span> <span style="color: #BA2121">super_mini_esp32c3</span>
+<span style="color: #7D9029">framework</span> <span style="color: #666666">=</span> <span style="color: #BA2121">arduino</span>
+</div>
+
+<p>Again, it will be necessary to manually put the board in bootloader 
+mode before uploading new firmware to it. Once that is done, the board 
+will have to be reset to resume normal functioning.</p>
+
+
+<!-- ++++ Section ++++++++++++++++++++++++++++++++++ -->
+<h1 id="sketches" class="Section">
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#sketches">Testing with Simple Sketches</a>
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#toc"><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/arrow-up.png" alt="toc" class="up-link-arrow"></a>
+</h1>
+
+<p>I have <em>created</em> a few sketches to test the Super Mini board. Actually, two are remixes of sketches in <a href="https://github.com/sigmdel/xiao_esp32c3_sketches">xiao_esp32c3_sketches</a> and three test the Wi-Fi capabilities of the board in different ways. The source code can be found in my <a href="https://github.com/sigmdel/">Github account</a> in the <a href="https://github.com/sigmdel/super_mini_esp32c3_sketches">super_mini_esp32c3_sketches</a>
+ repository (to be made public in the next few days). As before, they 
+are structured in such a way that they can be tested in the Arduino IDE 
+and in PlatformIO.</p>
+
+
+<!-- ++++ SubSection +++++++++++++++++++++++++++++++ -->
+<h2 id="hello" class="SubSection">
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#hello">Hello World</a>
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#toc"><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/arrow-up.png" alt="toc" class="up-link-arrow"></a>
+</h2>
+
+<p>The first sketch is <code>01_pin_names</code> which is a sort of long-winded <em>Hello World!</em> example. The sketch does two things.</p>
+<ol>
+<li>
+<p>It print out to the console the names and number of all the I/O pins.</p>
+</li>
+<li>
+<p>It checks that the boot button on the board can be activated.</p>
+</li>
+</ol>
+<p> The <code>platformio.ini</code> configuration file contains two different board definitions: my custom definition as <a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#platformio">described above</a> and the <code>dfrobot_beetle_esp32c3</code> definition for those that do not want to add a custom card definition. </p>
+
+<p>The second sketch, <code>02_blink_pulse_led</code> is the IoT version of the <em>Hello Worl!</em>
+ example since as the name suggests it blinks the on-board blue LED 
+found on Super Mini. Actually, it alternates, blinking the LED using a 
+heart beat pattern for 10 seconds and then pulsing the LED (slowly 
+fading and then brightening it) for 10 seconds. The latter illustrates 
+the PWM function which is available on all I/O pins of the ESP32-C3.</p>
+
+
+<!-- ++++ SubSection +++++++++++++++++++++++++++++++ -->
+<h2 id="wifi_test" class="SubSection">
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#wifi_test">Wi-Fi Functionality</a>
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#toc"><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/arrow-up.png" alt="toc" class="up-link-arrow"></a>
+</h2>
+
+
+<p>The next three sketches test the Wi-Fi functionality of the Super 
+Mini board. Comments on forums revealed that there could be Wi-Fi 
+problems related to the antenna. Espressif <a href="https://espressif.github.io/esp32-c3-book-en/chapter_5/5.2/5.2.5.html">rates ceramic</a>
+ antennas as used on the Super Mini as the only "low gain" type. The FPC
+ antenna used on the XIAO ESP32C3 is said to have "medium gain". The  
+results when running the third sketch <code>03_scan_wifi</code>  are consistent with that evaluation. Only two networks were found with a SuperMini ESP32-C3.</p>
+
+<div class="scrn listing">Scan start
+Scan done
+2 networks found
+Nr | SSID                             | RSSI | CH | Encryption
+ 1 | PLAYTECH25                       |  -33 |  6 | WPA2
+ 2 | OMEGAS3n6                        |  -34 |  6 | WPA2
+</div>
+
+<p>The same code on a XIAO ESP32C3 found four networks.</p>
+
+<div class="scrn listing">Scan start
+Scan done
+4 networks found
+Nr | SSID                             | RSSI | CH | Encryption
+ 1 | PLAYTECH25                       |  -30 |  6 | WPA2
+ 2 | OMEGAS3n6                        |  -31 |  6 | WPA2
+ 3 | BELL975                          |  -78 | 11 | WPA2
+ 4 | 1633 Guests                      |  -83 | 11 | WPA2
+</div>
+
+<p>It should be pointed out that  1 and 2 are our home networks and that
+ the test was run with the microcontrollers less than a metre away from 
+the Wi-Fi router. I am assuming that the other two networks are from our
+ nearest neighbour which may be about 80 metres away.</p>
+<!--
+I am always startled when I try to find a relative's network among the tens of WiFi networks, most labelled BELLxxxx, coming in at almost full strength. She lives in a relatively small apartment block in town. Consequently, I assume that our small of networks count will probably amuse city dwellers. Let me reassure you that the count will increase by 50 to 100% later when the weather improves and cottages are opened for summer.
+-->
+<p>Much more egregious, even after trying for two minutes, the Super Mini running the 4th sketch, <code>wifi_connect.ino</code>,
+ could not connect to the local Wi-Fi network. A XIAO ESP32C3 usually 
+connects in about half a second. Clearly, it's an impedance problem. 
+Actually,  I have no idea what I am talking about and I am just 
+repeating some <a href="https://community.home-assistant.io/t/esp32-c3-super-mini-wifi-signal-booster/657661/11">stuff I read</a>.
+ Nevertheless, it does make a bit of sense since I noticed that the 
+Super Mini would connect rapidly if my hand was touching or very near 
+the board. Besides, it does appear as if some components are missing 
+between the ceramic antenna and the <code>LNA_IN</code> pin of the ESP32-C3 chip.</p>
+
+<p>Clearly, holding onto the board to get the Wi-Fi working is not a viable solution. Luckily, my search yielded another Arduino <a href="https://forum.arduino.cc/t/que-vaut-cette-toute-petite-carte-a-esp32-basee-sur-esp32-c3/1193647/57">Forum message by al1fch</a> which said that "I solved my WiFi connection problems by reducing the transmission power with a [<code>WiFi.setTxPower</code>] command to put before <code>WiFI.begin()</code>". I tested that idea and it worked.</p>
+
+<div class="scrn listing">
+Attempting to connect to the Wi-Fi network for 120.0 sec.
+Wi-Fi TX power set to: 80
+...........................................................
+Not connected after 120.0 seconds
+[WiFi] WiFi is disconnected
+Retrying in 1 second
+
+Attempting to connect to the Wi-Fi network for 120.0 sec.
+Wi-Fi TX power set to: 44
+
+WiFi is connected with IP address: 192.168.0.166
+Time to connect: 948 ms
+</div>
+
+<p>If a Super Mini is having problems connecting to a Wi-Fi network, then enable the <code>#define TRY_TX_POWER</code> macro in the <code>wifi_connect</code>
+ sketch and you may have success as shown above. To be honest, setting 
+the transmit power to 11 dbm may not work, so it may be necessary to 
+adjust the <code>TX_POWER</code> macro to another value. Nevertheless, 
+the good news is that it was possible to get the Super Mini connected to
+ the Wi-Fi network.</p>
+<p>Picking a random transmit power is not the best way to get reliable Wi-Fi connections. I wrote the <code>wifi_tx_power</code>
+ project to try to ascertain the best setting for reliable results. The 
+following table shows the time five different ESP32-C3 dev boards needed
+ to establish a connection to the Wi-Fi network (in milliseconds). The <strong>SM x</strong> boards are the four Super Mini ESP32C3 boards I obtained recently while XIAO is the SeeedStudio XIAO ESP32C3 development board.</p>
+
+<table class="plain_table left-center-cells">
+<tbody><tr><th rowspan="2">Board</th><th rowspan="2">XIAO</th><th colspan="4">Super Mini</th></tr>
+<tr><th>SM 1</th><th>SM 2</th><th>SM 3</th><th>SM 4</th></tr>
+<tr><td>WIFI_POWER_default</td><td>1143</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+<tr><td>WIFI_POWER_19_5dBm</td><td>443</td><td>-</td><td>1230</td><td>-</td><td>-</td></tr>
+<tr><td>WIFI_POWER_19dBm</td><td>430</td><td>477</td><td>-</td><td>-</td><td>-</td></tr>
+<tr><td>WIFI_POWER_18_5dBm</td><td>440</td><td>546</td><td>961</td><td>-</td><td>-</td></tr>
+<tr><td>WIFI_POWER_17dBm</td><td>391</td><td>443</td><td>389</td><td>532</td><td>-</td></tr>
+<tr><td>WIFI_POWER_15dBm</td><td>404</td><td>410</td><td>425</td><td>422</td><td>-</td></tr>
+<tr><td>WIFI_POWER_13dBm</td><td>376</td><td>729</td><td>684</td><td>469</td><td>1440</td></tr>
+<tr><td>WIFI_POWER_11dBm</td><td>429</td><td>423</td><td>399</td><td>409</td><td>484</td></tr>
+<tr><td>WIFI_POWER_8_5dBm</td><td>729</td><td>1929</td><td>414</td><td>425</td><td>443</td></tr>
+<tr><td>WIFI_POWER_7dBm</td><td>1923</td><td>718</td><td>413</td><td>430</td><td>399</td></tr><tr>
+<td>WIFI_POWER_5dBm</td><td>904</td><td>388</td><td>427</td><td>546</td><td>442</td></tr>
+<tr><td>WIFI_POWER_2dBm</td><td>678</td><td>507</td><td>390</td><td>937</td><td>408</td></tr>
+</tbody></table>
+
+<p>Where there's a dash (<code>-</code>), the board had not been able to
+ connect in 2 minutes. The good news is that all boards managed to make a
+ connection with our local Wi-Fi network. The bad news it that the 
+transmission power setting is different from board to board, although 
+the XIAO managed to establish a connection no matter what the transmit 
+power was set to. Don't forget, the dev board is about a meter (39 
+inches) from the Wi-Fi router.</p>
+
+
+<!-- ++++ SubSection +++++++++++++++++++++++++++++++ -->
+<h2 id="bluetooth" class="SubSection">
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_fr.html#bleutooth">Bluetooth LE Functionality</a>
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_fr.html#toc"><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/arrow-up.png" alt="toc" class="up-link-arrow"></a>
+</h2>
+
+<p> In an overview of SeeedStudio's XIAO ESP32C3, a brief check of the 
+Bluetooth® Low Energy (BLE) capabilities of the ESP32-C3 microcontroller
+ was carried out. I'm not going to repeat this discussion here. I'll 
+simply say that the microcontroller is configured as a BLE device 
+(server) with an LED service and a switching characteristic. Any central
+ device (client) can obtain the status of the LED, turn it on, or turn 
+it off by sending the appropriate messages. <a href="https://www.sigmdel.ca/michel/ha/xiao/xiao_esp32c3_intro_en.html#ble">Bluetooth Controlled LED</a> explains how to use <a href="https://play.google.com/store/apps/details?id=com%20.punchthrough.lightblueexplorer" target="_blank">LightBlue</a>, an Android application as a client. I also used <a href="" target="_blank">nRF Connect</a> from Nordic to do the same thing.</p>
+
+<p> I adjusted the program so that it can be used with the Super Mini C3. It is in the <code>07_ble_led</code> directory of the <a href="https://github.com/sigmdel/supermini_esp32c3_sketches" target="_blank">supermini_esp32c3_sketches</a> repository on GitHub. The program uses the <a href="https://www.arduino.cc/reference/en/libraries/arduinoble/" target="_blank">ArduinoBLE</a>
+ library which does not seem to be the most used option for BLE on ESP32
+ chips. On the other hand, it seems simpler than the Espressif offer. 
+It's easy to use the <code>ArduinoBLE</code> library in PlatformIO. In the Arduino IDE, there will be a conflict between this library and the one included in the <code>esp32</code> kernel (3.0.1) of Espressif. The <code>ble_led.ino</code> file contains a possible approach to compiling <code>ble_led</code> with the Arduino IDE. I hope others find something better, because the proposed solution is not practical at all.</p>
+
+<p> In order to better test BLE connectivity with the ESP32-C3, I 
+created a similar project using the BLE library instead of the 
+ArduinoBLE library (see the <code>08_ble_led2</code> directory of the <a href="https://github.com/sigmdel/supermini_esp32c3_sketches" target="_blank">supermini_esp32c3_sketches</a> repository on GitHub). Initially, the BLE library was the <a href="https://github.com/nkolban/ESP32_BLE_Arduino" target="_blank">work of Neil Kolban</a>,
+ but it is now included in the ESP32 core for Arduino. Consequently, it 
+does not present any conflict and can be compiled in the Arduino IDE and
+ in PlatformIO. It has another advantage because it supports setting the
+ BLE power level. Unlike setting Wi-Fi TX (transmit) power, setting the 
+BLE power level did not result in obvious improvements in Bluetooth 
+connectivity. Only BLE power type ESP_BLE_PWR_TYPE_DEFAULT with power 
+levels -21dbm, -15dbm, -9dbm, -3dbm, +3dbm + 9dbm, +15dbm and +21dbm, 
+were tested. BLE power settings are more complex than Wi-Fi transmit 
+power settings, so there may be something to gain in investigating this 
+further.</p>
+
+<p> The important thing here is the performance of the Super Mini C3 
+cards. It is terrible. Sometimes the connection between the 
+microcontroller and the Android tablet took a considerable. At other 
+times, the tablet had to be very close to, practically touching, the 
+microcontroller for the connection to be made. There were times when a 
+connection could not be established at all, even though LightBlue found 
+the Super Mini when scanning for devices. The XIAO-ESP32C3, on the other
+ hand, was reliable showing that the problem cannot be attributed to the
+ ESP32-C3. It may very well be located at the antenna again. Here the <code>nRF Connect</code> scan graph illustrates the difference.</p>
+
+<p><a href="https://www.sigmdel.ca/michel/ha/esp8266/img/ble_super_mini_xiao_scan.jpg"><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/ble_super_mini_xiao_scan_part.jpg" alt="RSSI graphic"></a></p>
+
+<p> The above figure is actually two separate scans which were then 
+superimposed as if both a Super Mini C3 and a Seeed XIAO ESP32C3 were 
+advertising at the same time. Looking at that graph, it is obvious why 
+the Super Minis which I happen to have cannot be used for Bluetooth 
+connections.</p>
+
+
+<!-- ++++ Section ++++++++++++++++++++++++++++++++++++ -->
+<h1 id="recommend" class="Section">
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#recommend">Recommendation?</a>
+<a href="https://www.sigmdel.ca/michel/ha/esp8266/super_mini_esp32c3_en.html#toc"><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/arrow-up.png" alt="toc" class="up-link-arrow"></a>
+</h1>
+
+<p>Would I recommend purchasing a Super Mini ESP32C3? In a word: no. I am not the only one with questions about this board. Read <a href="https://forum.arduino.cc/t/esp32-c3-supermini-pinout/1189850/22">mabbaco's comment</a>
+ from about a year ago about dubious boards being offered by some 
+sellers. Do go on and read the comments that follow; it's all a bit 
+confusing.</p>
+
+<p>I should mention that all the boards I received had an ESP32-C3FN4 
+which is an end of life chip. That is probably not all that important; 
+the current version has a higher environmental temperature range, which 
+would rarely be consequential for hobbyists. The quality control 
+problems, as illustrated by <a href="https://forum.arduino.cc/t/esp32-c3-super-mini-probleme-liaison-serie/1250108/9">Treza88</a>) are more significant.</p>
+
+<p><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/esp32c3_super_mini_tombtoned.jpg" alt="tombstoned esp32c3"></p>
+
+<p>Indeed two of four boards I received had damaged crenellated 
+connection in the pin 5 location. While not making the board inoperable,
+ these defects do not inspire confidence.
+</p>
+
+<p>Also without a metal can, one can guess that these boards do not 
+comply with FCC regulations. In some circumstances a board that is 
+spewing RF interference could be a real problem.</p>
+
+<p>There is no valid reason to purchase these boards from the Aliexpress vendor at the <em>regular discounted</em>
+ price. Would I purchase them at the CDN $2.50 price point again? 
+Perhaps if I had a use for them for an outside project where the RF 
+interference would not be as important and if it did not require 
+Bluetooth. However I will have to test the effective Wi-Fi range before 
+make a final judgment about that.</p>
+
+<p>I will confess to a <em>préjugé favorable</em> (a positively 
+prejudiced opinion) when it comes to XIAO series boards. Their quality 
+and consistent form factor make them a favourite of mine. Shipping costs
+ is often a hurdle with Seeed products, but there are sales with free 
+shipping every now and then. The XIAO may be cheaper that some Super 
+Mini C3s on those occasions.</p>
+
+<p>Who am I to spew forth in this manner? Everyone should make up their 
+own mind. Besides, my sample of only four devices purchased from a 
+single supplier is far too limited. Please note that Bertrand 
+(Électro-Bidouilleur) published a 637th video entitled <a href="https://www.youtube.com/watch?v=ZgYA-s7rMmE" target="_blank">Découverte - Micro-Contrôleur ESP32-C3 avec WiFi et BLE</a>
+ (in French obviously) where there is never any question of the problems
+ described above. He got his Super Mini card from another seller and, 
+based on the label on the anti-static bag, the manufacturer might be 
+different.</p>
+
+<p>Finally, anyone planning to buy the XIAO ESP32C3 should look at the 
+XIAO ESP32C6 which is the big brother of the XIAO ESP32C3 offered at a 
+marginally higher price. I may have more to say about that latter 
+although there is a post about that board: <a href="https://www.sigmdel.ca/michel/ha/xiao/xiao_esp32c6_intro_en.html" target="_blank">First Look at the Seeed Studio XIAO ESP32C6</a>.</p>
+
+
+</div>
+<div class="hcontainer linktable-bottom">
+<span style="float: left"><a href="https://www.sigmdel.ca/michel/ha/xiao/xiao_esp32c3_intro_en.html"><img src="First%20Look%20at%20the%20Super%20Mini%20ESP32-C3_files/arrow-left.png" alt="&lt;-" class="left-link-arrow">First Look at the Seeed Studio XIAO ESP32C3</a></span>
+</div>
+<div id="footer">
+Last Update: June 26, 2024.
+Original version: May 11, 2024.
+<br>
+Copyright © 2024
+<script>
+	bvar='&#064;'
+	avar=('michel' + bvar + 'sigmdel' + '.' + 'ca')
+	bvar='mailto:'
+    cvar=encodeURI("?subject=About: First Look at the Super Mini ESP32-C3&body=File Name: ha/esp8266/super_mini_esp32c3_en.html.")
+    document.write(' <a href="' + bvar + avar + cvar + '">' + avar + '</a>')
+</script> <a href="mailto:michel@sigmdel.ca?subject=About:%20First%20Look%20at%20the%20Super%20Mini%20ESP32-C3&amp;body=File%20Name:%20ha/esp8266/super_mini_esp32c3_en.html.">michel@sigmdel.ca</a>
+<noscript>
+   michel&lt;at&gt;sigmdel&lt;&#8729;&gt;ca,
+</noscript>
+<br>
+
+</div>
+
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>

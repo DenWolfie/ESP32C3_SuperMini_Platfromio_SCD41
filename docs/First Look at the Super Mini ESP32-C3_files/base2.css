@@ -1,0 +1,435 @@
+
+body {
+text-align : left;
+font-family : Verdana, Tahoma, Arial, Helvetica, sans-serif;
+font-size : 16px;
+color : #451;
+background : white;
+line-height : 1.5em;
+margin : 15px;
+padding : 0;
+counter-reset : SectionCounter;
+}
+body img {
+display : block;
+margin-right : auto;
+}
+.hcontainer {
+width : 100%;
+vertical-align : middle;
+}
+.hcontainer::after, .clearfix::after {
+content : "";
+clear : both;
+display : table;
+}
+#topbar {
+width : 100%;
+padding : 0;
+margin : 0;
+display : inline-block;
+background : #4F5511;
+border : #4F5511 solid 1px;
+border-width : 1px 1px 0 1px;
+}
+#topbar img {
+vertical-align : middle;
+float : left;
+}
+#topbar .titre {
+font-size : 18px;
+font-weight : bold;
+float : left;
+color : white;
+margin-top : 3px;
+vertical-align : middle;
+}
+#topbar .date {
+font-size : 10px;
+font-weight : bold;
+color : white;
+margin-top : 5px;
+margin-right : 5px;
+float : right;
+}
+#menu {
+padding : 1px 0 1px 0;
+margin : 0;
+background : #D2D4C4;
+border : #4F5511 solid 1px;
+border-width : 0 1px 1px 1px;
+}
+#menu .choice {
+margin : 0;
+padding : 8px 8px;
+font-size : 13px;
+font-weight : bold;
+color : #666;
+display : inline-block;
+border : none;
+vertical-align : middle;
+background : inherit;
+cursor : pointer;
+}
+#menu .choice:hover {
+background-color : #D8E7B9;
+}
+#menu button:focus {
+outline : 0;
+}
+#search {
+font-family : Verdana, Tahoma, Arial, Helvetica, sans-serif;
+font-size : 14px;
+font-weight : normal;
+line-height : 1.2em;
+padding : 0;
+margin : 0 5px 0 0;
+clear : both;
+float : right;
+}
+#search .btn {
+font-family : Verdana, Tahoma, Arial, Helvetica, sans-serif;
+font-size : 15px;
+font-weight : normal;
+line-height : 1.2em;
+color : #666;
+margin : 0 0 0 2px;
+padding : 4px 4px 4px 4px;
+vertical-align : middle;
+border : 0;
+border-radius : 0;
+cursor : pointer;
+}
+#search .btn:hover {
+background-color : #D8E7B9;
+}
+.linktable-top {
+font-size : 0.8em;
+width : 100%;
+margin : 8px 0 24px 0;
+padding-bottom : 4px;
+border-bottom : 1px solid #D2D4C4;
+}
+.linktable-bottom {
+font-size : 0.8em;
+width : 100%;
+margin : 24px 0 12px 0;
+border-top : 2px solid #D2D4C4;
+text-decoration : none;
+}
+.left-link-arrow, .right-link-arrow, .up-link-arrow {
+width : 16px;
+height : 16px;
+display : inline-block;
+vertical-align : middle;
+margin : 0;
+}
+.left-link-arrow {
+margin-right : 8px;
+}
+.right-link-arrow {
+margin-left : 8px;
+}
+.up-link-arrow {
+padding-left : 4px;
+padding-right : 4px;
+}
+.linktable-top a {
+text-decoration : none;
+}
+.content {
+margin : 8px 0 0 20px;
+}
+.top_shim {
+padding-top : 24px;
+}
+h1 {
+font-size : 1.2em;
+color : #451;
+background-color : white;
+margin : 0 0 0 -20px;
+counter-reset : SubSectionCounter;
+}
+h1 a {
+background-color : white;
+text-decoration : none;
+}
+h1.Section::before {
+counter-increment : SectionCounter;
+content : counter(SectionCounter) ". ";
+}
+h2 {
+font-size : 1.1em;
+color : #451;
+background-color : white;
+margin : 0 0 0 -10px;
+counter-reset : SubSubSectionCounter;
+}
+h2 a {
+background-color : white;
+text-decoration : none;
+}
+h2.SubSection::before {
+counter-increment : SubSectionCounter;
+content : counter(SectionCounter) "." counter(SubSectionCounter) " ";
+}
+h3 {
+font-size : 1.0em;
+color : #451;
+background-color : white;
+margin : 0 0 0 -5px;
+}
+h3 a {
+background-color : white;
+text-decoration : none;
+}
+h3.SubSubSection::before {
+  counter-increment : SubSubSectionCounter;
+  content : counter(SectionCounter) "." counter(SubSectionCounter) "." counter(SubSubSectionCounter);
+  }
+a {
+color : #451;
+text-decoration : underline;
+}
+a:hover {
+background-color : #D8E7B9;
+}
+code {
+font-family : Consolas, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace;
+color : #888;
+font-weight : bold;
+}
+.listv li {
+margin-top : 14px;
+}
+.hide-block {
+display : none !important ;
+}
+.show-block {
+display : block !important ;
+}
+#footer {
+border-top : 1px solid #666;
+margin : 15px 0 0 0;
+padding : 15px 0 0 0;
+font-size : 13px;
+color : #666;
+line-height : 140%;
+text-align : center;
+}
+.post {
+margin : auto;
+padding-top : 15px;
+margin-bottom : 30px;
+margin-top : 10px;
+}
+.date, .indexdate {
+font-size : 13px;
+border : 0;
+padding : 0;
+margin : 0;
+color : #666;
+clear : both;
+}
+.date {
+text-align : right;
+}
+.indexdate {
+margin-bottom : -12px;
+}
+td.year {
+color : white;
+font-weight : bold;
+background : #727A2E;
+}
+.tm {
+font-weight : 600;
+}
+.plain_table {
+border : #DDEEEE solid 1px;
+border-collapse : collapse;
+border-spacing : 0;
+margin-right : auto;
+}
+.plain_table th {
+background-color : #d8e7b9;
+border : #4f5511 solid 1px;
+padding : 6px;
+font-weight : bold;
+text-align : center;
+}
+.plain_table td {
+border : #4f5511 solid 1px;
+padding : 6px;
+}
+.center-cells td {
+text-align : center;
+}
+.right-cells td {
+text-align : right;
+}
+.left-right-cells td {
+text-align : left;
+}
+.left-right-cells td + td {
+text-align : right;
+}
+.left-center-cells td {
+text-align : left;
+}
+.left-center-cells td + td {
+text-align : center;
+}
+.right-center-cells td {
+text-align : right;
+}
+.right-center-cells td + td {
+text-align : center;
+}
+.center-left-cells td {
+text-align : center;
+}
+.center-left-cells td + td {
+text-align : left;
+}
+.center-right-cells td th {
+text-align : center;
+}
+.center-right-cells td + td {
+text-align : right;
+}
+.center-last-right-cells td {
+text-align : center;
+}
+.center-last-right-cells td:last-child {
+text-align : right;
+}
+.center-last-left-cells td {
+text-align : center;
+}
+.center-last-left-cells td:last-child {
+text-align : left;
+}
+span.tab {
+color : white;
+background-color : #2B86B9;
+font-weight : bold;
+padding : 0 5px 1px 5px;
+}
+span.button {
+color : white;
+background-color : #44AED6;
+font-weight : bold;
+border-radius : 4px;
+padding : 0 5px 1px 5px;
+}
+span.darktitle {
+background-color : #4B4B4B;
+color : white;
+font-weight : bold;
+padding : 0 5px 1px 5px;
+}
+span.key {
+border : #666 solid 1px;
+border-radius : 4px;
+padding : 0 5px 1px 5px;
+}
+.scrn {
+font-family : Consolas, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace;
+font-size : 10pt;
+display : block;
+line-height : 1.6em;
+white-space : pre;
+padding : 0 1em 1em 1em;
+margin : 0;
+overflow : auto;
+width : auto;
+border : #4F5511 solid;
+border-width : 1px 1px 1px 12px;
+background-color : #303030;
+color : white;
+}
+.text {
+border-color : red;
+background-color : #A0A0A0;
+color : #4F5511;
+}
+.terminal {
+border-color : midnightblue;
+background-color : rgb(204, 231, 235);
+color : midnightblue;
+font-family : monospace;
+line-height : 1.2em;
+}
+.listing {
+background-color : #f8f8f8;
+border-color : gray;
+color : black;
+}
+.cmd {
+font-family : Consolas, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace;
+font-size : 10pt;
+white-space : pre;
+padding : 1px 5px 1px 5px;
+margin : 2px;
+border : green solid 1px;
+background-color : #4F5511;
+color : white;
+}
+.inline {
+font-family : Consolas, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace;
+white-space : pre;
+padding : 1px 2px 2px 0;
+background-color : #F0E0E0;
+}
+.frame {
+border : green solid 1px;
+padding : 4px;
+margin : 0 3em 0 3em;
+overflow : auto;
+}
+.note {
+border : green solid 2px;
+padding : 16px;
+margin : 0 3em 0 3em;
+overflow : auto;
+}
+.thickborder {
+border : #451 solid 2px;
+}
+.navy-border {
+border-color : navy;
+}
+.red-border {
+border-color : red;
+}
+.download-code {
+border : gray solid 1px;
+border-top : none;
+text-align : right;
+padding-right : 5px;
+font-size : 0.8em;
+}
+.box {
+font-family : Consolas, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace;
+font-size : 10pt;
+display : block;
+line-height : 1.4em;
+white-space : pre;
+color : black;
+background-color : #EEE;
+}
+span.comment {
+color : #333333;
+font-style : italic;
+}
+span.string {
+color : #0000c0;
+}
+span.keyword {
+color : #a00000;
+font-weight : bold;
+}
+span.library {
+color : #008000;
+}
