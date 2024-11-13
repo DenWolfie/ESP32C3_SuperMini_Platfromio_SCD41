@@ -31,7 +31,7 @@ copies or substantial portions of the Software. -->
 <script>
 var chartT = new Highcharts.Chart({
   chart:{ renderTo : 'chart-temperature' },
-  title: { text: 'BME280 Temperature' },
+  title: { text: 'SCD-41 Temperature' },
   series: [{
     showInLegend: false,
     data: []
@@ -71,7 +71,7 @@ setInterval(function ( ) {
 
 var chartH = new Highcharts.Chart({
   chart:{ renderTo:'chart-humidity' },
-  title: { text: 'BME280 Humidity' },
+  title: { text: 'SCD-41 Humidity' },
   series: [{
     showInLegend: false,
     data: []
@@ -110,7 +110,7 @@ setInterval(function ( ) {
 
 var chartP = new Highcharts.Chart({
   chart:{ renderTo:'chart-pressure' },
-  title: { text: 'BME280 Pressure' },
+  title: { text: 'SCD-41 CO2' },
   series: [{
     showInLegend: false,
     data: []
@@ -126,7 +126,7 @@ var chartP = new Highcharts.Chart({
     dateTimeLabelFormats: { second: '%H:%M:%S' }
   },
   yAxis: {
-    title: { text: 'Pressure (hPa)' }
+    title: { text: 'CO2 (ppm)' }
   },
   credits: { enabled: false }
 });
@@ -144,7 +144,7 @@ setInterval(function ( ) {
       }
     }
   };
-  xhttp.open("GET", "/pressure", true);
+  xhttp.open("GET", "/co2", true);
   xhttp.send();
 }, 30000 ) ;
 </script>

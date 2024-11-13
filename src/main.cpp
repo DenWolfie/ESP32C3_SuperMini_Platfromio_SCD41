@@ -37,10 +37,25 @@
 #include <ESPAsyncWebServer.h>
 #include <LittleFS.h>
 
+#include <PubSubClient.h>
+
 SensirionI2CScd4x scd4x;
 
 const char* ssid = "Zarafshan";
 const char* password = "BenyaMeow";
+
+// MQTT
+
+void mqtt_subscribe_callback(char* topic, byte* payload, unsigned int length) {
+  // handle message arrived
+}
+
+int mqtt_connected = -1;
+const char * mqtt_server = "artgamma.net";
+const int mqtt_port = 1883;
+WiFiClient espClient;
+PubSubClient client(mqtt_server, mqtt_port, mqtt_subscribe_callback, espClient);
+// ====
 
 // Create AsyncWebServer object on port 80
 AsyncWebServer server(80);
@@ -64,6 +79,71 @@ uint16_t co2 = 0;
 float temperature = 0.0f;
 float humidity = 0.0f;
 
+void WiFiScan(void)
+{
+    Serial.println("Scan start");
+ 
+    // WiFi.scanNetworks will return the number of networks found.
+    int n = WiFi.scanNetworks();
+    Serial.println("Scan done");
+    if (n == 0) {
+        Serial.println("no networks found");
+    } else {
+        Serial.print(n);
+        Serial.println(" networks found");
+        Serial.println("Nr | SSID                             | RSSI | CH | Encryption");
+        for (int i = 0; i < n; ++i) {
+            // Print SSID and RSSI for each network found
+            Serial.printf("%2d",i + 1);
+            Serial.print(" | ");
+            Serial.printf("%-32.32s", WiFi.SSID(i).c_str());
+            Serial.print(" | ");
+            Serial.printf("%4d", WiFi.RSSI(i));
+            Serial.print(" | ");
+            Serial.printf("%2d", WiFi.channel(i));
+            Serial.print(" | ");
+            switch (WiFi.encryptionType(i))
+            {
+            case WIFI_AUTH_OPEN:
+                Serial.print("open");
+                break;
+            case WIFI_AUTH_WEP:
+                Serial.print("WEP");
+                break;
+            case WIFI_AUTH_WPA_PSK:
+                Serial.print("WPA");
+                break;
+            case WIFI_AUTH_WPA2_PSK:
+                Serial.print("WPA2");
+                break;
+            case WIFI_AUTH_WPA_WPA2_PSK:
+                Serial.print("WPA+WPA2");
+                break;
+            case WIFI_AUTH_WPA2_ENTERPRISE:
+                Serial.print("WPA2-EAP");
+                break;
+            case WIFI_AUTH_WPA3_PSK:
+                Serial.print("WPA3");
+                break;
+            case WIFI_AUTH_WPA2_WPA3_PSK:
+                Serial.print("WPA2+WPA3");
+                break;
+            case WIFI_AUTH_WAPI_PSK:
+                Serial.print("WAPI");
+                break;
+            default:
+                Serial.print("unknown");
+            }
+            Serial.println();
+            delay(10);
+        }
+    }
+    Serial.println("");
+ 
+    // Delete the scan result to free memory for code below.
+    WiFi.scanDelete();
+}
+
 void setup() {
 
     Serial.begin(115200);
@@ -73,6 +153,14 @@ void setup() {
 
     Serial.print("Connecting to ");
     Serial.println(ssid);
+
+    WiFi.mode(WIFI_STA);
+    WiFi.disconnect();
+    delay(100);
+
+    WiFiScan();
+
+    delay(100);
 
     // Connect to Wi-Fi
     WiFi.begin(ssid, password);
@@ -88,6 +176,16 @@ void setup() {
     Serial.println("IP address: ");
     Serial.println(WiFi.localIP());
 
+    if (client.connect("arduinoClient", "esp32_co2", "esp32_co2"))
+    {
+        mqtt_connected = 1;
+        client.publish("/home/devices/co2", "{reboot}");
+        client.subscribe("inTopic");
+    }
+    else
+    {
+        mqtt_connected = -1;
+    }
 
     // Initialize LittleFS
     if (!LittleFS.begin())
@@ -183,5 +281,32 @@ void loop() {
         Serial.print("\t");
         Serial.print("Humidity:");
         Serial.println(humidity);
+    }
+
+/*
+{
+  "Received": {
+    "messageType": "DATA",
+    "data": "20.46",
+    "appId": "TEMP",
+    "ts": 1676292065686,
+    "timestamp": "13/03/2023 12:41:05"
+  }
+}
+*/
+
+    if(mqtt_connected > 0)
+    {
+        char json_buf[512];
+        snprintf(json_buf, sizeof(json_buf), "{sensor:\"SCD-41\", temp:\"%f\", hum:\"%f\", co2:\"%d\" millis=\"%d\"\r\n}", temperature, humidity, co2, millis());
+        if(client.publish("/home/devices/co2", json_buf))
+        {
+            Serial.print("[MQTT] Publish Ok\r\n");
+            Serial.printf("[MQTT] payload:%s\r\n", json_buf);
+        }
+        else
+        {
+            Serial.print("[MQTT] Publish Error\r\n");
+        }
     }
 }
