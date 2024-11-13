@@ -33,7 +33,17 @@
 #include <SensirionI2CScd4x.h>
 #include <Wire.h>
 
+#include <WiFi.h>
+#include <ESPAsyncWebServer.h>
+#include <LittleFS.h>
+
 SensirionI2CScd4x scd4x;
+
+const char* ssid = "Zarafshan";
+const char* password = "BenyaMeow";
+
+// Create AsyncWebServer object on port 80
+AsyncWebServer server(80);
 
 void printUint16Hex(uint16_t value) {
     Serial.print(value < 4096 ? "0" : "");
@@ -50,11 +60,40 @@ void printSerialNumber(uint16_t serial0, uint16_t serial1, uint16_t serial2) {
     Serial.println();
 }
 
+uint16_t co2 = 0;
+float temperature = 0.0f;
+float humidity = 0.0f;
+
 void setup() {
 
     Serial.begin(115200);
     while (!Serial) {
         delay(100);
+    }
+
+    Serial.print("Connecting to ");
+    Serial.println(ssid);
+
+    // Connect to Wi-Fi
+    WiFi.begin(ssid, password);
+    WiFi.setTxPower(WIFI_POWER_8_5dBm);
+
+    while (WiFi.status() != WL_CONNECTED) {
+        delay(2000);
+        Serial.print("Not connected. Status="); Serial.println(WiFi.status());
+    }
+
+    Serial.println("");
+    Serial.println("WiFi connected");
+    Serial.println("IP address: ");
+    Serial.println(WiFi.localIP());
+
+
+    // Initialize LittleFS
+    if (!LittleFS.begin())
+    {
+        Serial.println("An Error has occurred while mounting LittleFS");
+        return;
     }
 
     Wire.begin();
@@ -93,6 +132,21 @@ void setup() {
     }
 
     Serial.println("Waiting for first measurement... (5 sec)");
+    // Print ESP32 Local IP Address
+    Serial.println(WiFi.localIP());
+
+    // Route for root / web page
+    server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
+              { request->send(LittleFS, "/index.html"); });
+    server.on("/temperature", HTTP_GET, [](AsyncWebServerRequest *request)
+              { request->send(200, "text/plain", String(temperature)); });
+    server.on("/humidity", HTTP_GET, [](AsyncWebServerRequest *request)
+              { request->send(200, "text/plain", String(humidity)); });
+    server.on("/co2", HTTP_GET, [](AsyncWebServerRequest *request)
+              { request->send(200, "text/plain", String(co2)); });
+
+    // Start server
+    server.begin();
 }
 
 void loop() {
@@ -102,9 +156,6 @@ void loop() {
     delay(100);
 
     // Read Measurement
-    uint16_t co2 = 0;
-    float temperature = 0.0f;
-    float humidity = 0.0f;
     bool isDataReady = false;
     error = scd4x.getDataReadyFlag(isDataReady);
     if (error) {
